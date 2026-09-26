@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Website Checker Pro</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#070b12;
+    color:#fff;
+    min-height:100vh;
+}
+
+.container{
+    width:94%;
+    max-width:1100px;
+    margin:auto;
+    padding:20px 0 50px;
+}
+
+.header{
+    text-align:center;
+    padding:25px 5px;
+}
+
+.logo{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    background:linear-gradient(135deg,#1677ff,#7c3aed);
+    box-shadow:0 10px 35px #1677ff44;
+}
+
+.header h1{
+    margin-top:15px;
+    font-size:30px;
+}
+
+.header p{
+    margin-top:7px;
+    color:#8d99aa;
+    font-size:14px;
+}
+
+.card{
+    background:#111722;
+    border:1px solid #252f3e;
+    border-radius:20px;
+    padding:18px;
+    margin-top:18px;
+    box-shadow:0 12px 35px #0008;
+}
+
+.label{
+    color:#aeb8c8;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.url-row{
+    display:flex;
+    gap:10px;
+}
+
+input{
+    flex:1;
+    min-width:0;
+    background:#080d15;
+    color:#fff;
+    border:1px solid #303a4a;
+    border-radius:12px;
+    padding:15px;
+    outline:none;
+    font-size:15px;
+}
+
+input:focus{
+    border-color:#1677ff;
+}
+
+button{
+    border:0;
+    color:#fff;
+    border-radius:11px;
+    padding:13px 17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+.check{
+    background:#1677ff;
+}
+
+.clear{
+    background:#303846;
+}
+
+.status{
+    margin-top:14px;
+    padding:12px;
+    background:#090e16;
+    border:1px solid #222c3a;
+    border-radius:11px;
+    color:#aeb9c8;
+    font-size:14px;
+}
+
+.stats{
+    display:none;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:12px;
+}
+
+.stat{
+    background:#0b111a;
+    border:1px solid #202a38;
+    border-radius:12px;
+    padding:13px;
+}
+
+.stat small{
+    color:#7f8b9d;
+}
+
+.stat strong{
+    display:block;
+    margin-top:5px;
+    word-break:break-all;
+    font-size:13px;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:12px;
+}
+
+.tab{
+    background:#1b2431;
+}
+
+.tab.active{
+    background:#1677ff;
+}
+
+.panel{
+    display:none;
+}
+
+.panel.active{
+    display:block;
+}
+
+.preview-frame{
+    width:100%;
+    height:600px;
+    border:1px solid #303a49;
+    border-radius:12px;
+    background:#fff;
+}
+
+textarea{
+    width:100%;
+    height:600px;
+    resize:vertical;
+    background:#05080d;
+    color:#dce7f5;
+    border:1px solid #303a49;
+    border-radius:12px;
+    padding:16px;
+    font-family:Consolas,monospace;
+    font-size:13px;
+    line-height:1.5;
+    outline:none;
+}
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-top:12px;
+}
+
+.open{
+    background:#00a86b;
+}
+
+.refresh{
+    background:#7c3aed;
+}
+
+.copy{
+    background:#e53935;
+}
+
+.download{
+    background:#0088cc;
+}
+
+.source{
+    background:#f59e0b;
+}
+
+.empty{
+    text-align:center;
+    color:#758195;
+    padding:35px 15px;
+}
+
+.note{
+    margin-top:14px;
+    padding:13px;
+    border-radius:11px;
+    background:#17130a;
+    border:1px solid #493816;
+    color:#d8bd7b;
+    font-size:13px;
+    line-height:1.5;
+}
+
+@media(max-width:700px){
+
+    .url-row{
+        flex-direction:column;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .preview-frame{
+        height:500px;
+    }
+
+    textarea{
+        height:500px;
+    }
+
+    .header h1{
+        font-size:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="logo">🌐</div>
+
+        <h1>Website Checker Pro</h1>
+
+        <p>
+            Preview • HTML Source • Download
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="label">
+            🌐 Website URL
+        </div>
+
+        <div class="url-row">
+
+            <input
+                id="urlInput"
+                type="text"
+                placeholder="https://example.com"
+                autocomplete="off"
+            >
+
+            <button
+                class="check"
+                onclick="checkWebsite()"
+            >
+                🔍 Check
+            </button>
+
+            <button
+                class="clear"
+                onclick="clearAll()"
+            >
+                Clear
+            </button>
+
+        </div>
+
+
+        <div id="status" class="status">
+            Enter a website URL and press Check.
+        </div>
+
+
+        <div id="stats" class="stats">
+
+            <div class="stat">
+                <small>Website</small>
+                <strong id="website">-</strong>
+            </div>
+
+            <div class="stat">
+                <small>HTTP Status</small>
+                <strong id="httpStatus">-</strong>
+            </div>
+
+            <div class="stat">
+                <small>HTML Size</small>
+                <strong id="htmlSize">-</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="resultCard"
+        class="card"
+        style="display:none"
+    >
+
+        <div class="tabs">
+
+            <button
+                id="previewTab"
+                class="tab active"
+                onclick="showPanel('preview')"
+            >
+                👁️ Preview
+            </button>
+
+            <button
+                id="sourceTab"
+                class="tab"
+                onclick="showPanel('source')"
+            >
+                💻 View Source
+            </button>
+
+        </div>
+
+
+        <div
+            id="previewPanel"
+            class="panel active"
+        >
+
+            <iframe
+                id="previewFrame"
+                class="preview-frame"
+                sandbox="allow-scripts allow-forms allow-popups"
+            ></iframe>
+
+
+            <div class="actions">
+
+                <button
+                    class="open"
+                    onclick="openOriginal()"
+                >
+                    🌐 Open Website
+                </button>
+
+                <button
+                    class="refresh"
+                    onclick="refreshPreview()"
+                >
+                    🔄 Refresh
+                </button>
+
+                <button
+                    class="source"
+                    onclick="showPanel('source')"
+                >
+                    💻 View Source
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="sourcePanel"
+            class="panel"
+        >
+
+            <textarea
+                id="sourceCode"
+                spellcheck="false"
+                placeholder="HTML source will appear here..."
+            ></textarea>
+
+
+            <div class="actions">
+
+                <button
+                    class="copy"
+                    onclick="copyCode()"
+                >
+                    📋 Copy Code
+                </button>
+
+                <button
+                    class="download"
+                    onclick="downloadHTML()"
+                >
+                    ⬇️ Download index.html
+                </button>
+
+                <button
+                    class="refresh"
+                    onclick="showPanel('preview')"
+                >
+                    👁️ Preview
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="note">
+
+            ⚠️ This tool retrieves the HTML that the target
+            website sends to the browser. Server-side code such
+            as PHP, Python, Node.js or database code is never
+            exposed by a website source request.
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="empty"
+        class="card empty"
+    >
+        🌐 Enter a URL above to check a website.
+    </div>
+
+</div>
+
+
+<script>
+
+/*
+========================================
+IMPORTANT
+========================================
+
+After deploying server.js on Render,
+replace the URL below.
+
+Example:
+
+const API_BASE =
+"https://website-checker-xxxx.onrender.com";
+
+========================================
+*/
+
+const API_BASE =
+"https://YOUR-RENDER-APP.onrender.com";
+
+
+let currentURL = "";
+let currentHTML = "";
+
+
+/* ================================
+   NORMALIZE URL
+================================ */
+
+function normalizeURL(value){
+
+    value = value.trim();
+
+    if(!value){
+        return "";
+    }
+
+    if(
+        !value.startsWith("http://") &&
+        !value.startsWith("https://")
+    ){
+        value = "https://" + value;
+    }
+
+    return value;
+}
+
+
+/* ================================
+   CHECK WEBSITE
+================================ */
+
+async function checkWebsite(){
+
+    const input =
+        document.getElementById("urlInput");
+
+    const status =
+        document.getElementById("status");
+
+    let url =
+        normalizeURL(input.value);
+
+    if(!url){
+
+        status.textContent =
+            "❌ Please enter a website URL.";
+
+        return;
+    }
+
+
+    try{
+
+        new URL(url);
+
+    }catch{
+
+        status.textContent =
+            "❌ Invalid URL.";
+
+        return;
+    }
+
+
+    if(
+        API_BASE.includes("YOUR-RENDER-APP")
+    ){
+
+        status.textContent =
+            "⚠️ Please add your Render backend URL inside index.html.";
+
+        return;
+    }
+
+
+    currentURL = url;
+
+
+    status.textContent =
+        "⏳ Fetching website HTML...";
+
+
+    document.getElementById(
+        "resultCard"
+    ).style.display = "none";
+
+
+    try{
+
+        const api =
+            API_BASE +
+            "/api/fetch?url=" +
+            encodeURIComponent(url);
+
+
+        const response =
+            await fetch(api);
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.error ||
+                "Website could not be fetched."
+            );
+
+        }
+
+
+        currentHTML =
+            data.html || "";
+
+
+        document.getElementById(
+            "website"
+        ).textContent =
+            data.url || url;
+
+
+        document.getElementById(
+            "httpStatus"
+        ).textContent =
+            data.status || "-";
+
+
+        document.getElementById(
+            "htmlSize"
+        ).textContent =
+            formatBytes(
+                new Blob(
+                    [currentHTML]
+                ).size
+            );
+
+
+        document.getElementById(
+            "sourceCode"
+        ).value =
+            currentHTML;
+
+
+        document.getElementById(
+            "stats"
+        ).style.display =
+            "grid";
+
+
+        document.getElementById(
+            "resultCard"
+        ).style.display =
+            "block";
+
+
+        status.textContent =
+            "✅ Website source loaded successfully.";
+
+
+        loadPreview(url);
+
+
+    }catch(error){
+
+        console.error(error);
+
+        status.textContent =
+            "❌ " + error.message;
+
+    }
+
+}
+
+
+/* ================================
+   PREVIEW
+================================ */
+
+function loadPreview(url){
+
+    const frame =
+        document.getElementById(
+            "previewFrame"
+        );
+
+
+    const previewURL =
+        API_BASE +
+        "/api/preview?url=" +
+        encodeURIComponent(url);
+
+
+    frame.src =
+        previewURL;
+
+}
+
+
+function refreshPreview(){
+
+    if(currentURL){
+
+        loadPreview(
+            currentURL
+        );
+
+    }
+
+}
+
+
+function openOriginal(){
+
+    if(!currentURL){
+        return;
+    }
+
+    window.open(
+        currentURL,
+        "_blank"
+    );
+
+}
+
+
+/* ================================
+   PANELS
+================================ */
+
+function showPanel(name){
+
+    const preview =
+        document.getElementById(
+            "previewPanel"
+        );
+
+    const source =
+        document.getElementById(
+            "sourcePanel"
+        );
+
+    const previewTab =
+        document.getElementById(
+            "previewTab"
+        );
+
+    const sourceTab =
+        document.getElementById(
+            "sourceTab"
+        );
+
+
+    if(name === "preview"){
+
+        preview.classList.add("active");
+
+        source.classList.remove("active");
+
+        previewTab.classList.add("active");
+
+        sourceTab.classList.remove("active");
+
+    }else{
+
+        source.classList.add("active");
+
+        preview.classList.remove("active");
+
+        sourceTab.classList.add("active");
+
+        previewTab.classList.remove("active");
+
+    }
+
+}
+
+
+/* ================================
+   COPY
+================================ */
+
+async function copyCode(){
+
+    const code =
+        document.getElementById(
+            "sourceCode"
+        ).value;
+
+
+    if(!code){
+
+        alert(
+            "No HTML source available."
+        );
+
+        return;
+    }
+
+
+    try{
+
+        await navigator.clipboard
+            .writeText(code);
+
+        alert(
+            "✅ HTML code copied!"
+        );
+
+    }catch{
+
+        const textarea =
+            document.getElementById(
+                "sourceCode"
+            );
+
+        textarea.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+        alert(
+            "✅ HTML code copied!"
+        );
+
+    }
+
+}
+
+
+/* ================================
+   DOWNLOAD
+================================ */
+
+function downloadHTML(){
+
+    const code =
+        document.getElementById(
+            "sourceCode"
+        ).value;
+
+
+    if(!code){
+
+        alert(
+            "No HTML source available."
+        );
+
+        return;
+    }
+
+
+    const blob =
+        new Blob(
+            [code],
+            {
+                type:
+                "text/html;charset=utf-8"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+    link.download =
+        "index.html";
+
+
+    document.body.appendChild(
+        link
+    );
+
+    link.click();
+
+    link.remove();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* ================================
+   CLEAR
+================================ */
+
+function clearAll(){
+
+    currentURL = "";
+
+    currentHTML = "";
+
+
+    document.getElementById(
+        "urlInput"
+    ).value = "";
+
+
+    document.getElementById(
+        "sourceCode"
+    ).value = "";
+
+
+    document.getElementById(
+        "previewFrame"
+    ).src =
+        "about:blank";
+
+
+    document.getElementById(
+        "resultCard"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "stats"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "empty"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "status"
+    ).textContent =
+        "Enter a website URL and press Check.";
+
+}
+
+
+/* ================================
+   FORMAT BYTES
+================================ */
+
+function formatBytes(bytes){
+
+    if(!bytes){
+        return "0 Bytes";
+    }
+
+
+    const units = [
+        "Bytes",
+        "KB",
+        "MB",
+        "GB"
+    ];
+
+
+    const index =
+        Math.floor(
+            Math.log(bytes) /
+            Math.log(1024)
+        );
+
+
+    return (
+        (
+            bytes /
+            Math.pow(
+                1024,
+                index
+            )
+        ).toFixed(2)
+        + " "
+        + units[index]
+    );
+
+}
+
+
+/* ================================
+   ENTER KEY
+================================ */
+
+document
+.getElementById("urlInput")
+.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Enter"){
+
+            checkWebsite();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
