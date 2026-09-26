@@ -1,1008 +1,758 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>Website Checker Pro</title>
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#070b12;
-    color:#fff;
-    min-height:100vh;
-}
-
-.container{
-    width:94%;
-    max-width:1100px;
-    margin:auto;
-    padding:20px 0 50px;
-}
-
-.header{
-    text-align:center;
-    padding:25px 5px;
-}
-
-.logo{
-    width:70px;
-    height:70px;
-    margin:auto;
-    border-radius:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:32px;
-    background:linear-gradient(135deg,#1677ff,#7c3aed);
-    box-shadow:0 10px 35px #1677ff44;
-}
-
-.header h1{
-    margin-top:15px;
-    font-size:30px;
-}
-
-.header p{
-    margin-top:7px;
-    color:#8d99aa;
-    font-size:14px;
-}
-
-.card{
-    background:#111722;
-    border:1px solid #252f3e;
-    border-radius:20px;
-    padding:18px;
-    margin-top:18px;
-    box-shadow:0 12px 35px #0008;
-}
-
-.label{
-    color:#aeb8c8;
-    font-size:14px;
-    margin-bottom:8px;
-}
-
-.url-row{
-    display:flex;
-    gap:10px;
-}
-
-input{
-    flex:1;
-    min-width:0;
-    background:#080d15;
-    color:#fff;
-    border:1px solid #303a4a;
-    border-radius:12px;
-    padding:15px;
-    outline:none;
-    font-size:15px;
-}
-
-input:focus{
-    border-color:#1677ff;
-}
-
-button{
-    border:0;
-    color:#fff;
-    border-radius:11px;
-    padding:13px 17px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-button:active{
-    transform:scale(.97);
-}
-
-.check{
-    background:#1677ff;
-}
-
-.clear{
-    background:#303846;
-}
-
-.status{
-    margin-top:14px;
-    padding:12px;
-    background:#090e16;
-    border:1px solid #222c3a;
-    border-radius:11px;
-    color:#aeb9c8;
-    font-size:14px;
-}
-
-.stats{
-    display:none;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-top:12px;
-}
-
-.stat{
-    background:#0b111a;
-    border:1px solid #202a38;
-    border-radius:12px;
-    padding:13px;
-}
-
-.stat small{
-    color:#7f8b9d;
-}
-
-.stat strong{
-    display:block;
-    margin-top:5px;
-    word-break:break-all;
-    font-size:13px;
-}
-
-.tabs{
-    display:flex;
-    gap:8px;
-    margin-bottom:12px;
-}
-
-.tab{
-    background:#1b2431;
-}
-
-.tab.active{
-    background:#1677ff;
-}
-
-.panel{
-    display:none;
-}
-
-.panel.active{
-    display:block;
-}
-
-.preview-frame{
-    width:100%;
-    height:600px;
-    border:1px solid #303a49;
-    border-radius:12px;
-    background:#fff;
-}
-
-textarea{
-    width:100%;
-    height:600px;
-    resize:vertical;
-    background:#05080d;
-    color:#dce7f5;
-    border:1px solid #303a49;
-    border-radius:12px;
-    padding:16px;
-    font-family:Consolas,monospace;
-    font-size:13px;
-    line-height:1.5;
-    outline:none;
-}
-
-.actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
-    margin-top:12px;
-}
-
-.open{
-    background:#00a86b;
-}
-
-.refresh{
-    background:#7c3aed;
-}
-
-.copy{
-    background:#e53935;
-}
-
-.download{
-    background:#0088cc;
-}
-
-.source{
-    background:#f59e0b;
-}
-
-.empty{
-    text-align:center;
-    color:#758195;
-    padding:35px 15px;
-}
-
-.note{
-    margin-top:14px;
-    padding:13px;
-    border-radius:11px;
-    background:#17130a;
-    border:1px solid #493816;
-    color:#d8bd7b;
-    font-size:13px;
-    line-height:1.5;
-}
-
-@media(max-width:700px){
-
-    .url-row{
-        flex-direction:column;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Checker Pro</title>  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .stats{
-        grid-template-columns:1fr;
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: #fff;
+      min-height: 100vh;
     }
 
-    .preview-frame{
-        height:500px;
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
     }
 
-    textarea{
-        height:500px;
+    .header {
+      text-align: center;
+      padding: 25px 10px;
     }
 
-    .header h1{
-        font-size:25px;
+    .header h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
     }
-}
-</style>
-</head>
 
-<body>
+    .header p {
+      color: #9ca3af;
+      font-size: 14px;
+    }
 
-<div class="container">
+    .card {
+      background: #111827;
+      border: 1px solid #263244;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.25);
+    }
 
-    <div class="header">
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
 
-        <div class="logo">🌐</div>
+    #urlInput {
+      flex: 1;
+      min-width: 0;
+      background: #0b1220;
+      color: #fff;
+      border: 1px solid #344155;
+      border-radius: 12px;
+      padding: 14px;
+      outline: none;
+      font-size: 15px;
+    }
 
-        <h1>Website Checker Pro</h1>
+    #urlInput:focus {
+      border-color: #3b82f6;
+    }
 
-        <p>
-            Preview • HTML Source • Download
-        </p>
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 13px 18px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+    }
 
-    </div>
+    button:hover {
+      transform: translateY(-1px);
+      opacity: .92;
+    }
 
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+    }
 
-    <div class="card">
+    .btn-success {
+      background: #16a34a;
+      color: #fff;
+    }
 
-        <div class="label">
-            🌐 Website URL
-        </div>
+    .btn-danger {
+      background: #dc2626;
+      color: #fff;
+    }
 
-        <div class="url-row">
+    .btn-dark {
+      background: #273449;
+      color: #fff;
+    }
 
-            <input
-                id="urlInput"
-                type="text"
-                placeholder="https://example.com"
-                autocomplete="off"
-            >
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
 
-            <button
-                class="check"
-                onclick="checkWebsite()"
-            >
-                🔍 Check
-            </button>
+    .stat {
+      background: #0b1220;
+      border: 1px solid #273449;
+      border-radius: 14px;
+      padding: 16px;
+    }
 
-            <button
-                class="clear"
-                onclick="clearAll()"
-            >
-                Clear
-            </button>
+    .stat-title {
+      color: #9ca3af;
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
 
-        </div>
+    .stat-value {
+      font-size: 16px;
+      font-weight: bold;
+      word-break: break-word;
+    }
 
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
 
-        <div id="status" class="status">
-            Enter a website URL and press Check.
-        </div>
+    .tab {
+      background: #273449;
+      color: #fff;
+    }
 
+    .tab.active {
+      background: #2563eb;
+    }
 
-        <div id="stats" class="stats">
+    .content-box {
+      display: none;
+    }
 
-            <div class="stat">
-                <small>Website</small>
-                <strong id="website">-</strong>
-            </div>
+    .content-box.active {
+      display: block;
+    }
 
-            <div class="stat">
-                <small>HTTP Status</small>
-                <strong id="httpStatus">-</strong>
-            </div>
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      background: #fff;
+    }
 
-            <div class="stat">
-                <small>HTML Size</small>
-                <strong id="htmlSize">-</strong>
-            </div>
+    #sourceCode {
+      width: 100%;
+      height: 600px;
+      resize: vertical;
+      background: #050914;
+      color: #d1d5db;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 15px;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      outline: none;
+    }
 
-        </div>
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
 
-    </div>
+    .status {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #0b1220;
+      color: #9ca3af;
+      display: none;
+    }
 
+    .status.show {
+      display: block;
+    }
 
-    <div
-        id="resultCard"
-        class="card"
-        style="display:none"
-    >
+    .footer {
+      text-align: center;
+      color: #6b7280;
+      font-size: 12px;
+      padding: 15px;
+    }
 
-        <div class="tabs">
+    @media (max-width: 700px) {
+      .input-area {
+        flex-direction: column;
+      }
 
-            <button
-                id="previewTab"
-                class="tab active"
-                onclick="showPanel('preview')"
-            >
-                👁️ Preview
-            </button>
+      .stats {
+        grid-template-columns: 1fr;
+      }
 
-            <button
-                id="sourceTab"
-                class="tab"
-                onclick="showPanel('source')"
-            >
-                💻 View Source
-            </button>
+      iframe,
+      #sourceCode {
+        height: 500px;
+      }
 
-        </div>
+      .header h1 {
+        font-size: 25px;
+      }
+    }
+  </style></head><body><div class="container">  <div class="header">
+    <h1>🌐 Website Checker Pro</h1>
+    <p>Check website status, preview pages and view HTML source</p>
+  </div>  <div class="card"><div class="input-area">
+  <input
+    type="url"
+    id="urlInput"
+    placeholder="https://example.com"
+    autocomplete="off"
+  >
 
+  <button class="btn-primary" onclick="checkWebsite()">
+    🔍 Check
+  </button>
 
-        <div
-            id="previewPanel"
-            class="panel active"
-        >
+  <button class="btn-danger" onclick="clearAll()">
+    ✕ Clear
+  </button>
+</div>
 
-            <iframe
-                id="previewFrame"
-                class="preview-frame"
-                sandbox="allow-scripts allow-forms allow-popups"
-            ></iframe>
+<div id="statusMessage" class="status"></div>
 
+  </div>  <div class="card"><div class="stats">
 
-            <div class="actions">
+  <div class="stat">
+    <div class="stat-title">WEBSITE</div>
+    <div class="stat-value" id="websiteStatus">—</div>
+  </div>
 
-                <button
-                    class="open"
-                    onclick="openOriginal()"
-                >
-                    🌐 Open Website
-                </button>
+  <div class="stat">
+    <div class="stat-title">HTTP STATUS</div>
+    <div class="stat-value" id="httpStatus">—</div>
+  </div>
 
-                <button
-                    class="refresh"
-                    onclick="refreshPreview()"
-                >
-                    🔄 Refresh
-                </button>
-
-                <button
-                    class="source"
-                    onclick="showPanel('source')"
-                >
-                    💻 View Source
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div
-            id="sourcePanel"
-            class="panel"
-        >
-
-            <textarea
-                id="sourceCode"
-                spellcheck="false"
-                placeholder="HTML source will appear here..."
-            ></textarea>
-
-
-            <div class="actions">
-
-                <button
-                    class="copy"
-                    onclick="copyCode()"
-                >
-                    📋 Copy Code
-                </button>
-
-                <button
-                    class="download"
-                    onclick="downloadHTML()"
-                >
-                    ⬇️ Download index.html
-                </button>
-
-                <button
-                    class="refresh"
-                    onclick="showPanel('preview')"
-                >
-                    👁️ Preview
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="note">
-
-            ⚠️ This tool retrieves the HTML that the target
-            website sends to the browser. Server-side code such
-            as PHP, Python, Node.js or database code is never
-            exposed by a website source request.
-
-        </div>
-
-    </div>
-
-
-    <div
-        id="empty"
-        class="card empty"
-    >
-        🌐 Enter a URL above to check a website.
-    </div>
+  <div class="stat">
+    <div class="stat-title">HTML SIZE</div>
+    <div class="stat-value" id="htmlSize">—</div>
+  </div>
 
 </div>
 
+  </div>  <div class="card"><div class="tabs">
 
-<script>
+  <button
+    class="tab active"
+    id="previewTab"
+    onclick="showTab('preview')">
+    👁 Preview
+  </button>
 
-/*
-========================================
-IMPORTANT
-========================================
+  <button
+    class="tab"
+    id="sourceTab"
+    onclick="showTab('source')">
+    &lt;/&gt; View Source
+  </button>
 
-After deploying server.js on Render,
-replace the URL below.
+</div>
 
-Example:
+<div id="previewBox" class="content-box active">
 
-const API_BASE =
-"https://website-checker-xxxx.onrender.com";
+  <iframe
+    id="previewFrame"
+    sandbox="allow-scripts allow-forms allow-popups allow-modals">
+  </iframe>
 
-========================================
-*/
+</div>
 
-const API_BASE =
-"https://YOUR-RENDER-APP.onrender.com";
+<div id="sourceBox" class="content-box">
+
+  <textarea
+    id="sourceCode"
+    readonly
+    placeholder="HTML source will appear here...">
+  </textarea>
+
+  <div class="actions">
+
+    <button class="btn-success" onclick="copySource()">
+      📋 Copy Code
+    </button>
+
+    <button class="btn-primary" onclick="downloadHTML()">
+      ⬇ Download index.html
+    </button>
+
+    <button class="btn-dark" onclick="showTab('preview')">
+      👁 Preview
+    </button>
+
+  </div>
+
+</div>
+
+  </div>  <div class="card"><div class="actions">
+
+  <button class="btn-primary" onclick="openWebsite()">
+    🌐 Open Website
+  </button>
+
+  <button class="btn-dark" onclick="refreshPreview()">
+    🔄 Refresh Preview
+  </button>
+
+</div>
+
+  </div>  <div class="footer">
+    Website Checker Pro • Powered by Render
+  </div></div><script>
+
+  /* ==============================
+     RENDER BACKEND URL
+  ============================== */
+
+  const API_BASE = "https://wevo-j2gp.onrender.com";
 
 
-let currentURL = "";
-let currentHTML = "";
+  let currentURL = "";
+  let currentHTML = "";
 
 
-/* ================================
-   NORMALIZE URL
-================================ */
+  function showStatus(message, type = "normal") {
 
-function normalizeURL(value){
+    const box = document.getElementById("statusMessage");
 
-    value = value.trim();
+    box.textContent = message;
+    box.classList.add("show");
 
-    if(!value){
-        return "";
+    if (type === "error") {
+      box.style.color = "#fca5a5";
+    } else {
+      box.style.color = "#9ca3af";
+    }
+  }
+
+
+  function hideStatus() {
+
+    document
+      .getElementById("statusMessage")
+      .classList.remove("show");
+
+  }
+
+
+  function normalizeURL(url) {
+
+    url = url.trim();
+
+    if (!url) {
+      return "";
     }
 
-    if(
-        !value.startsWith("http://") &&
-        !value.startsWith("https://")
-    ){
-        value = "https://" + value;
+    if (!/^https?:\/\//i.test(url)) {
+      url = "https://" + url;
     }
 
-    return value;
-}
+    return url;
+  }
 
 
-/* ================================
-   CHECK WEBSITE
-================================ */
+  async function checkWebsite() {
 
-async function checkWebsite(){
+    let url = document
+      .getElementById("urlInput")
+      .value
+      .trim();
 
-    const input =
-        document.getElementById("urlInput");
+    if (!url) {
 
-    const status =
-        document.getElementById("status");
+      showStatus(
+        "Please enter a website URL.",
+        "error"
+      );
 
-    let url =
-        normalizeURL(input.value);
-
-    if(!url){
-
-        status.textContent =
-            "❌ Please enter a website URL.";
-
-        return;
+      return;
     }
 
+    url = normalizeURL(url);
 
-    try{
+    try {
 
-        new URL(url);
+      new URL(url);
 
-    }catch{
+    } catch {
 
-        status.textContent =
-            "❌ Invalid URL.";
+      showStatus(
+        "Invalid website URL.",
+        "error"
+      );
 
-        return;
-    }
-
-
-    if(
-        API_BASE.includes("YOUR-RENDER-APP")
-    ){
-
-        status.textContent =
-            "⚠️ Please add your Render backend URL inside index.html.";
-
-        return;
+      return;
     }
 
 
     currentURL = url;
 
-
-    status.textContent =
-        "⏳ Fetching website HTML...";
+    showStatus("⏳ Checking website...");
 
 
-    document.getElementById(
-        "resultCard"
-    ).style.display = "none";
+    try {
+
+      const response = await fetch(
+        API_BASE +
+        "/api/fetch?url=" +
+        encodeURIComponent(url)
+      );
 
 
-    try{
-
-        const api =
-            API_BASE +
-            "/api/fetch?url=" +
-            encodeURIComponent(url);
+      const data = await response.json();
 
 
-        const response =
-            await fetch(api);
+      if (!response.ok || !data.success) {
+
+        throw new Error(
+          data.error || "Unable to fetch website."
+        );
+
+      }
 
 
-        const data =
-            await response.json();
+      currentHTML = data.html || "";
 
 
-        if(
-            !response.ok ||
-            !data.success
-        ){
-
-            throw new Error(
-                data.error ||
-                "Website could not be fetched."
-            );
-
-        }
+      document.getElementById("websiteStatus")
+        .textContent =
+        data.finalUrl || url;
 
 
-        currentHTML =
-            data.html || "";
+      document.getElementById("httpStatus")
+        .textContent =
+        data.status || "—";
 
 
-        document.getElementById(
-            "website"
-        ).textContent =
-            data.url || url;
-
-
-        document.getElementById(
-            "httpStatus"
-        ).textContent =
-            data.status || "-";
-
-
-        document.getElementById(
-            "htmlSize"
-        ).textContent =
-            formatBytes(
-                new Blob(
-                    [currentHTML]
-                ).size
-            );
-
-
-        document.getElementById(
-            "sourceCode"
-        ).value =
-            currentHTML;
-
-
-        document.getElementById(
-            "stats"
-        ).style.display =
-            "grid";
-
-
-        document.getElementById(
-            "resultCard"
-        ).style.display =
-            "block";
-
-
-        status.textContent =
-            "✅ Website source loaded successfully.";
-
-
-        loadPreview(url);
-
-
-    }catch(error){
-
-        console.error(error);
-
-        status.textContent =
-            "❌ " + error.message;
-
-    }
-
-}
-
-
-/* ================================
-   PREVIEW
-================================ */
-
-function loadPreview(url){
-
-    const frame =
-        document.getElementById(
-            "previewFrame"
+      document.getElementById("htmlSize")
+        .textContent =
+        formatBytes(
+          new Blob([currentHTML]).size
         );
 
 
-    const previewURL =
+      document.getElementById("sourceCode")
+        .value = currentHTML;
+
+
+      document.getElementById("previewFrame")
+        .src =
         API_BASE +
         "/api/preview?url=" +
         encodeURIComponent(url);
 
 
-    frame.src =
-        previewURL;
+      showStatus(
+        "✅ Website checked successfully."
+      );
 
-}
+    } catch (error) {
 
+      console.error(error);
 
-function refreshPreview(){
+      showStatus(
+        "❌ " + error.message,
+        "error"
+      );
 
-    if(currentURL){
+      document.getElementById("websiteStatus")
+        .textContent = "Error";
 
-        loadPreview(
-            currentURL
-        );
+      document.getElementById("httpStatus")
+        .textContent = "—";
+
+      document.getElementById("htmlSize")
+        .textContent = "—";
 
     }
 
-}
+  }
 
 
-function openOriginal(){
+  function formatBytes(bytes) {
 
-    if(!currentURL){
-        return;
+    if (!bytes) {
+      return "0 B";
     }
 
-    window.open(
-        currentURL,
-        "_blank"
-    );
+    const units = [
+      "B",
+      "KB",
+      "MB",
+      "GB"
+    ];
 
-}
+    let i = 0;
+
+    while (
+      bytes >= 1024 &&
+      i < units.length - 1
+    ) {
+
+      bytes /= 1024;
+      i++;
+
+    }
+
+    return bytes.toFixed(2) + " " + units[i];
+
+  }
 
 
-/* ================================
-   PANELS
-================================ */
+  function showTab(tab) {
 
-function showPanel(name){
+    const previewBox =
+      document.getElementById("previewBox");
 
-    const preview =
-        document.getElementById(
-            "previewPanel"
-        );
-
-    const source =
-        document.getElementById(
-            "sourcePanel"
-        );
+    const sourceBox =
+      document.getElementById("sourceBox");
 
     const previewTab =
-        document.getElementById(
-            "previewTab"
-        );
+      document.getElementById("previewTab");
 
     const sourceTab =
-        document.getElementById(
-            "sourceTab"
-        );
+      document.getElementById("sourceTab");
 
 
-    if(name === "preview"){
+    if (tab === "preview") {
 
-        preview.classList.add("active");
+      previewBox.classList.add("active");
+      sourceBox.classList.remove("active");
 
-        source.classList.remove("active");
+      previewTab.classList.add("active");
+      sourceTab.classList.remove("active");
 
-        previewTab.classList.add("active");
+    } else {
 
-        sourceTab.classList.remove("active");
+      sourceBox.classList.add("active");
+      previewBox.classList.remove("active");
 
-    }else{
-
-        source.classList.add("active");
-
-        preview.classList.remove("active");
-
-        sourceTab.classList.add("active");
-
-        previewTab.classList.remove("active");
+      sourceTab.classList.add("active");
+      previewTab.classList.remove("active");
 
     }
 
-}
+  }
 
 
-/* ================================
-   COPY
-================================ */
+  async function copySource() {
 
-async function copyCode(){
+    if (!currentHTML) {
 
-    const code =
-        document.getElementById(
-            "sourceCode"
-        ).value;
+      showStatus(
+        "No HTML source available.",
+        "error"
+      );
 
-
-    if(!code){
-
-        alert(
-            "No HTML source available."
-        );
-
-        return;
+      return;
     }
 
 
-    try{
+    try {
 
-        await navigator.clipboard
-            .writeText(code);
+      await navigator.clipboard.writeText(
+        currentHTML
+      );
 
-        alert(
-            "✅ HTML code copied!"
-        );
+      showStatus(
+        "✅ HTML source copied successfully."
+      );
 
-    }catch{
+    } catch {
 
-        const textarea =
-            document.getElementById(
-                "sourceCode"
-            );
+      const textarea =
+        document.getElementById("sourceCode");
 
-        textarea.select();
+      textarea.select();
 
-        document.execCommand(
-            "copy"
-        );
+      document.execCommand("copy");
 
-        alert(
-            "✅ HTML code copied!"
-        );
+      showStatus(
+        "✅ HTML source copied."
+      );
 
     }
 
-}
+  }
 
 
-/* ================================
-   DOWNLOAD
-================================ */
+  function downloadHTML() {
 
-function downloadHTML(){
+    if (!currentHTML) {
 
-    const code =
-        document.getElementById(
-            "sourceCode"
-        ).value;
+      showStatus(
+        "No HTML source available.",
+        "error"
+      );
 
-
-    if(!code){
-
-        alert(
-            "No HTML source available."
-        );
-
-        return;
+      return;
     }
 
 
-    const blob =
-        new Blob(
-            [code],
-            {
-                type:
-                "text/html;charset=utf-8"
-            }
-        );
+    const blob = new Blob(
+      [currentHTML],
+      {
+        type: "text/html;charset=utf-8"
+      }
+    );
 
 
     const url =
-        URL.createObjectURL(blob);
+      URL.createObjectURL(blob);
 
 
     const link =
-        document.createElement(
-            "a"
-        );
+      document.createElement("a");
 
 
-    link.href =
-        url;
+    link.href = url;
+    link.download = "index.html";
 
-    link.download =
-        "index.html";
-
-
-    document.body.appendChild(
-        link
-    );
+    document.body.appendChild(link);
 
     link.click();
 
     link.remove();
 
+    URL.revokeObjectURL(url);
 
-    URL.revokeObjectURL(
-        url
+
+    showStatus(
+      "⬇ index.html downloaded."
     );
 
-}
+  }
 
 
-/* ================================
-   CLEAR
-================================ */
+  function openWebsite() {
 
-function clearAll(){
+    if (!currentURL) {
+
+      showStatus(
+        "Please check a website first.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    window.open(
+      currentURL,
+      "_blank"
+    );
+
+  }
+
+
+  function refreshPreview() {
+
+    if (!currentURL) {
+
+      showStatus(
+        "Please check a website first.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const frame =
+      document.getElementById("previewFrame");
+
+
+    frame.src =
+      API_BASE +
+      "/api/preview?url=" +
+      encodeURIComponent(currentURL);
+
+
+    showStatus(
+      "🔄 Preview refreshed."
+    );
+
+  }
+
+
+  function clearAll() {
 
     currentURL = "";
-
     currentHTML = "";
 
 
-    document.getElementById(
-        "urlInput"
-    ).value = "";
+    document.getElementById("urlInput")
+      .value = "";
 
 
-    document.getElementById(
-        "sourceCode"
-    ).value = "";
+    document.getElementById("sourceCode")
+      .value = "";
 
 
-    document.getElementById(
-        "previewFrame"
-    ).src =
-        "about:blank";
+    document.getElementById("previewFrame")
+      .src = "about:blank";
 
 
-    document.getElementById(
-        "resultCard"
-    ).style.display =
-        "none";
+    document.getElementById("websiteStatus")
+      .textContent = "—";
 
 
-    document.getElementById(
-        "stats"
-    ).style.display =
-        "none";
+    document.getElementById("httpStatus")
+      .textContent = "—";
 
 
-    document.getElementById(
-        "empty"
-    ).style.display =
-        "block";
+    document.getElementById("htmlSize")
+      .textContent = "—";
 
 
-    document.getElementById(
-        "status"
-    ).textContent =
-        "Enter a website URL and press Check.";
+    hideStatus();
 
-}
+    showTab("preview");
 
-
-/* ================================
-   FORMAT BYTES
-================================ */
-
-function formatBytes(bytes){
-
-    if(!bytes){
-        return "0 Bytes";
-    }
+  }
 
 
-    const units = [
-        "Bytes",
-        "KB",
-        "MB",
-        "GB"
-    ];
+  document
+    .getElementById("urlInput")
+    .addEventListener(
+      "keydown",
+      function(event) {
 
-
-    const index =
-        Math.floor(
-            Math.log(bytes) /
-            Math.log(1024)
-        );
-
-
-    return (
-        (
-            bytes /
-            Math.pow(
-                1024,
-                index
-            )
-        ).toFixed(2)
-        + " "
-        + units[index]
-    );
-
-}
-
-
-/* ================================
-   ENTER KEY
-================================ */
-
-document
-.getElementById("urlInput")
-.addEventListener(
-    "keydown",
-    function(event){
-
-        if(event.key === "Enter"){
-
-            checkWebsite();
-
+        if (event.key === "Enter") {
+          checkWebsite();
         }
 
-    }
-);
+      }
+    );
 
-</script>
-
-</body>
+</script></body>
 </html>
